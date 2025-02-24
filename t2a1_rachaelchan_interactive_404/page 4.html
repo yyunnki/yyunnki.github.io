@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore - Explanation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #ffffff;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        #container {
+            width: 960px;
+            height: 540px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: url('ai gen introduction.png') center/cover no-repeat;
+            overflow: hidden;
+        }
+
+        .explore-header {
+            font-size: 2.5em;
+            color: #6366f1;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .sub-header {
+            font-size: 1.5em;
+            color: #6366f1;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-box {
+            width: 800px;
+            padding: 15px;
+            background-color: #6366f1;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .info-box .hidden-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .info-box:hover .hidden-text {
+            opacity: 1;
+        }
+
+        .next-button {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #6366f1, #a855f7);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="explore-header">EXPLORE</div>
+        <div class="sub-header">Understanding AI vs Human Content</div>
+        
+        <div class="info-container">
+            <div class="info-box">
+                Pictures
+                <div class="hidden-text">Human-created pictures often have a natural touch, imperfections, and emotional depth. AI-generated images may look realistic but can have subtle distortions and lack true creative intent.</div>
+            </div>
+            <div class="info-box">
+                Videos
+                <div class="hidden-text">Human-made videos involve real-world footage, storytelling, and genuine emotions. AI-generated videos rely on deep learning and can create synthetic but often less natural movements.</div>
+            </div>
+            <div class="info-box">
+                Music
+                <div class="hidden-text">Human-composed music reflects emotions, personal experiences, and cultural influences. AI-generated music can mimic styles but often lacks deep emotional resonance.</div>
+            </div>
+        </div>
+
+        <a href="page 5.html">
+            <button class="next-button">Next</button>
+        </a>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

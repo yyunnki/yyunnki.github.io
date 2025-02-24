@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn About AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #ffffff;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        #container {
+            width: 960px;
+            height: 540px;
+            position: absolute; /* Positioned at top left */
+            top: 0;
+            left: 0;
+            background: url('ai gen introduction.png') center/cover no-repeat;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content inside container */
+            justify-content: flex-start;
+            text-align: center;
+        }
+
+        .learn-header {
+            font-size: 3em;
+            color: #6366f1;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        .intro h1 {
+            font-size: 2.5em;
+            color: #6366f1;
+        }
+
+        .intro p {
+            font-size: 1.2em;
+            color: #4b5563;
+            max-width: 80%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        /* Cards Section */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .card {
+            width: 200px;
+            height: 250px;
+            background: #fff;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card.flip {
+            transform: rotateY(180deg);
+        }
+
+        .card .front, .card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .card .front {
+            background: #6366f1;
+            color: white;
+            font-weight: bold;
+        }
+
+        .card .back {
+            background: #a855f7;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .card.myth .back {
+            background: #ef4444; /* Red for Myth */
+        }
+
+        .card.fact .back {
+            background: #10b981; /* Green for Fact */
+        }
+
+        /* Button Styles */
+        .next-button {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #6366f1, #a855f7);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            align-items: center;
+        }
+
+        /* Pros & Cons Section */
+        .pros-cons {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pros-cons button {
+            padding: 12px 20px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin: 10px;
+        }
+
+        .pros-cons .statement {
+            display: none;
+            font-size: 1.2em;
+            color: #4b5563;
+            margin-top: 10px;
+        }
+
+        /* Pop-Up Explanation */
+        .popup {
+            display: none;
+            position: absolute; 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .popup button {
+            background: #f87171;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 1.2em;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        .popup .statement {
+            margin-top: 10px;
+        }
+
+        .popup.green .statement {
+            color: #10b981; /* Green for Pro */
+        }
+
+        .popup.red .statement {
+            color: #ef4444; /* Red for Con */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- LEARN Header -->
+        <div class="learn-header">LEARN</div>
+
+        <!-- Intro Section -->
+        <div class="intro" id="intro">
+            <h1>What is AI?</h1>
+            <p>Artificial Intelligence (AI) refers to the simulation of human intelligence in machines, enabling them to perform tasks that typically require human cognition. These tasks include learning from data (machine learning), reasoning, problem-solving, understanding natural language, and recognising patterns.</p>
+            <button class="next-button" onclick="showCards()">Next</button>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="card-container" id="card-container">
+            <div class="card myth" onclick="flipCard(this)" data-progress="33">
+                <div class="front">AI can think and feel like humans. </div>
+                <div class="back">Myth: AI does not have consciousness or emotions. It processes data and performs tasks based on algorithms and programming.</div>
+            </div>
+            <div class="card myth" onclick="flipCard(this)" data-progress="66">
+                <div class="front">AI will eventually replace all human jobs.</div>
+                <div class="back">Myth: While AI can automate some tasks, it often works alongside humans, enhancing productivity rather than replacing workers entirely.</div>
+            </div>
+            <div class="card fact" onclick="flipCard(this)" data-progress="100">
+                <div class="front">AI is fallible and biased.</div>
+                <div class="back">Fact: AI systems can be biased, as they are trained on data that may include human biases. It’s important to monitor and correct them.</div>
+            </div>
+        </div>
+
+        <!-- Next Button -->
+        <button class="next-button" id="nextButton" onclick="showProsCons()" style="display: none;">Next</button>
+
+        <!-- Pros & Cons Section -->
+        <div class="pros-cons" id="pros-cons">
+            <button onclick="showStatement('pro1')">Pro: Efficiency & Automation</button>
+            <div class="statement" id="pro1">AI can automate repetitive tasks, allowing humans to focus on more creative and strategic work.</div>
+
+            <button onclick="showStatement('pro2')">Pro: 24/7 Availability</button>
+            <div class="statement" id="pro2">Unlike humans, AI-powered systems can operate continuously without breaks, improving customer service and operations.</div>
+
+            <button onclick="showStatement('pro3')">Pro: Enhanced Creativity</button>
+            <div class="statement" id="pro3">AI tools like ChatGPT, Midjourney, and DALL·E assist in content creation, generating text, music, and images.</div>
+
+            <button onclick="showStatement('con1')">Con: Bias & Discrimination</button>
+            <div class="statement" id="con1">AI systems can inherit biases from the data they are trained on, leading to unfair outcomes or discrimination.</div>
+
+            <button onclick="showStatement('con2')">Con: Lack of Creativity & Emotions</button>
+            <div class="statement" id="con2">AI can mimic creativity but lacks true emotional intelligence, human intuition, and critical thinking.</div>
+
+            <button onclick="showStatement('con3')">Con: Dependence on AI</button>
+            <div class="statement" id="con3">Over-reliance on AI in decision-making may reduce human judgment and problem-solving skills over time.</div>
+           
+            <p>                                .</p>
+            <a href="page 3.html" class="next-button">Next</a>
+        </div>
+
+        <!-- Pop-Up Explanation -->
+        <div class="popup" id="popup">
+            <button onclick="closePopup()">X</button>
+            <div class="statement" id="popupStatement"></div>
+        </div>
+    </div>
+
+    <script>
+        let progressValue = 0;
+
+        // Show card section after clicking Next
+        function showCards() {
+            document.getElementById('intro').style.display = 'none';
+            const cardContainer = document.getElementById('card-container');
+            cardContainer.style.opacity = 1; // Make cards visible
+            document.getElementById('nextButton').style.display = 'inline-block'; // Show Next button after cards
+        }
+
+        // Flip card and change color
+        function flipCard(card) {
+            card.classList.toggle('flip');
+            if (card.classList.contains('myth')) {
+                card.style.backgroundColor = '#ef4444'; // Red for Myth
+            } else if (card.classList.contains('fact')) {
+                card.style.backgroundColor = '#10b981'; // Green for Fact
+            }
+        }
+
+        // Show Pros & Cons section
+        function showProsCons() {
+            document.getElementById('card-container').style.display = 'none';
+            document.getElementById('nextButton').style.display = 'none';
+            document.getElementById('pros-cons').style.display = 'block'; // Show pros and cons section
+        }
+
+        // Reveal statement when button is clicked
+        function showStatement(statementId) {
+            const statement = document.getElementById(statementId);
+            const popup = document.getElementById('popup');
+            const popupStatement = document.getElementById('popupStatement');
+            popup.style.display = 'block';
+            popupStatement.textContent = statement.textContent;
+
+            // Change color for Pro/Con
+            if (statementId.includes('pro')) {
+                popup.classList.add('green');
+                popup.classList.remove('red');
+            } else {
+                popup.classList.add('red');
+                popup.classList.remove('green');
+            }
+        }
+
+        // Close popup when 'x' is clicked
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

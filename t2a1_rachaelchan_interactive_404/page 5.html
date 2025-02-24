@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=960, initial-scale=1">
+    <title>Generative AI Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            width: 960px;
+            height: 540px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: url('ai gen introduction.png') center/cover no-repeat;
+            background-color: white;
+            
+        }
+
+        h1 {
+            text-align: center;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: #4caf50;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align:center ;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.3s;
+
+        }
+        .correct { background-color: green !important; color: white; }
+        .wrong { background-color: red !important; color: white; }
+        .result-image { text-align: center; margin-top: 20px; }
+        .result-image img { max-width: 100%; height: auto; max-height: 300px; }
+        .retake-button {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .retake-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .retake-button button:hover {
+            background-color: #45a049;
+        }
+
+        .test-header {
+            font-size: 3em;
+            color: #6366f1;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       <div class="test-header">Test</div>
+        <div class="progress-bar"><div class="progress"></div></div>
+        <div class="question" id="question">Loading question...</div>
+        <div class="options" id="options"></div>
+        <div class="result-image" id="resultImage"></div>
+        <div class="retake-button" id="retakeButton">
+            <button onclick="restartQuiz()">Retake Quiz</button>
+        </div>
+    </div>
+    <script>
+        const quizData = [
+            { question: "What does AI stand for?", options: ["Automated Information", "Artificial Intelligence", "Advanced Internet"], answer: 1 },
+            { question: "Which of these is a generative AI model?", options: ["Excel", "GPT-4", "PowerPoint"], answer: 1 },
+            { question: "What is a common use of generative AI?", options: ["Looking at memes", "Creating images", "Browsing websites"], answer: 1 },
+            { question: "Which of the following is an example of AI in everyday life?", options: ["A smartphone’s voice assistant (e.g., Siri, Google Assistant)", "A calculator", "A landline phone"], answer: 0 },
+            { question: "Which company created ChatGPT?", options: ["Google", "OpenAI", "Meta"], answer: 1 },
+            { question: "Which of the following is a common myth about AI?", options: ["AI is used in recommendation systems like Netflix", "AI helps automate repetitive tasks", "AI will completely replace all human jobs in the next decade"], answer: 2 },
+            { question: "Which of these statements is true about AI?", options: ["AI can recognize patterns in data and make predictions", "AI has emotions and personal opinions", "AI does not require any human training"], answer: 0 },
+            { question: "What is one ethical concern with AI?", options: ["AI is too expensive for companies to use", "AI systems can sometimes have biased outcomes", "AI cannot make any mistakes"], answer: 1 },
+            { question: "Which of these is NOT a risk of AI?", options: ["AI can be used to create deepfake videos", "AI can spread misinformation", "AI will develop human emotions"], answer: 2 },
+            { question: "What should humans do to ensure AI is used responsibly?", options: ["Let AI evolve on its own without interference", "Create regulations and ethical guidelines for AI", "Avoid using AI completely"], answer: 1 }
+        ];
+        let currentQuestion = 0;
+        let score = 0;
+        let progress = document.querySelector(".progress");
+        
+        function loadQuestion() {
+            let questionData = quizData[currentQuestion];
+            document.getElementById("question").textContent = questionData.question;
+            let optionsContainer = document.getElementById("options");
+            optionsContainer.innerHTML = "";
+            
+            questionData.options.forEach((option, index) => {
+                let button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index, questionData.answer, button, optionsContainer);
+                optionsContainer.appendChild(button);
+            });
+        }
+        
+        function checkAnswer(selectedIndex, correctIndex, button, optionsContainer) {
+            if (selectedIndex === correctIndex) {
+                button.classList.add("correct");
+                score++;
+            } else {
+                button.classList.add("wrong");
+                optionsContainer.children[correctIndex].classList.add("correct");
+            }
+            setTimeout(nextQuestion, 1000);
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+
+        function updateProgress() {
+            progress.style.width = ((currentQuestion + 1) / quizData.length) * 100 + "%";
+        }
+
+        function showResults() {
+            document.getElementById("question").textContent = "Quiz Completed!";
+            document.getElementById("options").innerHTML = "";
+            let resultImage = document.getElementById("resultImage");
+            resultImage.innerHTML = "";
+            let img = document.createElement("img");
+            
+            if (score <= 3) {
+                img.src = "1.png";
+            } else if (score <= 6) {
+                img.src = "2.png";
+            } else if (score <= 9) {
+                img.src = "3.png";
+            } else {
+                img.src = "4.png";
+            }
+            img.alt = "Quiz result";
+            resultImage.appendChild(img);
+
+            // Show retake button
+            document.getElementById("retakeButton").style.display = "block";
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            progress.style.width = "0%";
+            document.getElementById("resultImage").innerHTML = "";
+            document.getElementById("retakeButton").style.display = "none";
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

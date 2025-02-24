@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore AI vs Human</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #ffffff;
+            display: flex;
+            align-items: flex-start;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #container {
+            width: 960px;
+            height: 540px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: url('ai gen introduction.png') center/cover no-repeat;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .explore-header {
+            font-size: 2.5em;
+            color: #6366f1;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .category-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .category {
+            width: 180px;
+            height: 120px;
+            background-color: #6366f1;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .category:hover {
+            transform: scale(1.1);
+        }
+
+        .content-section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .content-section img,
+        .content-section video {
+            max-width: 70%;
+            max-height: 388px;
+            margin: 10px;
+        }
+
+        .media-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .back-button {
+            padding: 10px 25px;
+            background: linear-gradient(45deg, #6366f1, #a855f7);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+         .next-button {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #6366f1, #a855f7);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- EXPLORE Header -->
+        <div class="explore-header">EXPLORE</div>
+
+        <!-- Category Selection -->
+        <div class="category-container">
+            <div class="category" onclick="showContent('picture')">Picture</div>
+            <div class="category" onclick="showContent('video')">Video</div>
+            <div class="category" onclick="showContent('music')">Music</div>
+            <a href="page 4.html">
+                <button class="next-button">Next</button>
+            </a>
+        </div>
+
+        <!-- Picture Content Section -->
+        <div id="pictureContent" class="content-section">
+            <h2>Picture: Human vs AI</h2>
+            <div class="media-container">
+                <div>
+                    <p>Human-created picture:</p>
+                    <img src="real specs.jpg" alt="Human-created Picture">
+                </div>
+                <div>
+                    <p>AI-generated picture:</p>
+                    <img src="ai specs.jpg" alt="AI-generated Picture">
+                </div>
+            </div>
+            <button class="back-button" onclick="backToCategories()">Back</button>
+        </div>
+
+        <!-- Video Content Section -->
+        <div id="videoContent" class="content-section">
+            <h2>Video: Human vs AI</h2>
+            <div class="media-container">
+                <div>
+                    <p>Human-created video:</p>
+                    <video controls>
+                        <source src="real panda.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div>
+                    <p>AI-generated video:</p>
+                    <video controls>
+                        <source src="ai panda.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <button class="back-button" onclick="backToCategories()">Back</button>
+        </div>
+
+        <!-- Music Content Section -->
+        <div id="musicContent" class="content-section">
+            <h2>Music: Human vs AI</h2>
+            <div class="media-container">
+                <div>
+                    <p>Human-created music:</p>
+                    <audio controls>
+                        <source src="real super.mp3" type="audio/mp3">
+                    </audio>
+                </div>
+                <div>
+                    <p>AI-generated music:</p>
+                    <audio controls>
+                        <source src="ai super.mp3" type="audio/mp3">
+                    </audio>
+                </div>
+            </div>
+            <button class="back-button" onclick="backToCategories()">Back</button>
+        </div>
+    </div>
+
+    <script>
+        // Show content based on the selected category
+        function showContent(category) {
+            document.querySelector('.category-container').style.display = 'none';
+            document.querySelectorAll('.content-section').forEach(section => section.style.display = 'none');
+            document.getElementById(`${category}Content`).style.display = 'flex';
+        }
+
+        // Go back to the category selection
+        function backToCategories() {
+            document.querySelector('.category-container').style.display = 'flex';
+            document.querySelectorAll('.content-section').forEach(section => section.style.display = 'none');
+        }
+    </script>
+</body>
+</html>

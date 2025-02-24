@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn About Generative AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        #container {
+            width: 960px;
+            height: 540px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            background: url('ai gen introduction.png') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 3.2em;
+            font-weight: 800;
+            background: linear-gradient(45deg, #6366f1, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #6366f1;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 1em;
+            line-height: 1.5;
+            color: #4b5563;
+            max-width: 580px;
+            margin-bottom: 25px;
+        }
+
+        .feature-grid {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            width: 160px;
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
+        }
+
+        .feature-item h3 {
+            font-size: 1em;
+            color: #6366f1;
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            font-size: 0.9em;
+            color: #4b5563;
+        }
+
+        .start-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 12px 35px;
+            font-size: 1.1em;
+            background: linear-gradient(45deg, #6366f1, #a855f7);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .start-button:active {
+            transform: translateY(1px);
+        }
+
+        @media (orientation: portrait) {
+            body::before {
+                content: "Please rotate your device to landscape mode";
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+                text-align: center;
+                z-index: 1000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="screen" id="welcome">
+            <h1>Generative AI Explorer</h1>
+            <p class="subtitle">Discover the Future of Creative Technology</p>
+            <p class="description">Embark on an interactive journey to understand how AI is revolutionising content creation, problem-solving, and innovation across industries.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Learn</h3>
+                    <p>Understand AI through interactive examples</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Explore</h3>
+                    <p>See real-world applications and possibilities of AI</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Test</h3>
+                    <p>Challenge your knowledge on AI with quizzes</p>
+                </div>
+            </div>
+            <a href="page 2.html">
+                <button class="start-button">Start Your Journey</button>
+            </a>
+            
+        </div>
+    </div>
+
+    <script>
+        function nextScreen() {
+            alert("Next screen coming soon!"); // Temporary action
+        }
+    </script>
+</body>
+</html>
